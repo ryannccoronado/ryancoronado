@@ -214,6 +214,66 @@ h2.serif {
 }
 .release-btn:hover { color: var(--offwhite); border-color: rgba(240,236,228,0.5); }
 
+/* ── COMING SOON MODAL ── */
+.cs-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  background: rgba(8,8,8,0.7);
+  backdrop-filter: blur(10px);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.cs-overlay.open { opacity: 1; visibility: visible; }
+.cs-modal {
+  position: relative;
+  width: 100%; max-width: 440px;
+  padding: 4rem 3rem 3rem;
+  text-align: center;
+  background: linear-gradient(165deg, #121110 0%, #0a0a09 100%);
+  border: 0.5px solid var(--border-mid);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 0 0 1px rgba(240,236,228,0.03);
+  transform: translateY(22px) scale(0.96);
+  transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+}
+.cs-overlay.open .cs-modal { transform: translateY(0) scale(1); }
+.cs-modal::before {
+  content: ''; position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 46px; height: 0.5px; background: rgba(240,236,228,0.35);
+}
+.cs-close {
+  position: absolute; top: 1.4rem; right: 1.5rem;
+  background: none; border: none; cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  color: rgba(240,236,228,0.35);
+  transition: color 0.2s;
+}
+.cs-close:hover { color: var(--offwhite); }
+.cs-eyebrow {
+  font-size: 0.56rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: rgba(240,236,228,0.35); margin-bottom: 1.6rem;
+}
+.cs-title {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(2.1rem, 6vw, 2.9rem);
+  color: var(--offwhite); margin-bottom: 1.2rem; line-height: 1.05;
+}
+.cs-text {
+  font-size: 0.72rem; line-height: 1.95; color: var(--muted);
+  max-width: 340px; margin: 0 auto 2.4rem;
+}
+.cs-dismiss {
+  display: inline-block;
+  font-size: 0.58rem; letter-spacing: 0.24em; text-transform: uppercase;
+  border: 0.5px solid var(--border-mid); color: rgba(240,236,228,0.55);
+  background: none; padding: 0.75rem 1.8rem; cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: 'DM Mono', monospace;
+}
+.cs-dismiss:hover { color: var(--offwhite); border-color: rgba(240,236,228,0.6); }
+
 /* ── LIVE ── */
 .live { border-top: 0.5px solid var(--border); }
 .live-mosaic {
@@ -370,7 +430,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 <section class="releases" id="releases">
   <p class="label reveal">Releases</p>
   <div class="releases-grid">
-    <div class="release-card reveal">
+    <div class="release-card reveal" onclick="openComingSoon()">
       <div class="release-vinyl">
         <img src="images/release-barbed-wire.jpg" alt="Barbed Wire cover art">
       </div>
@@ -378,10 +438,10 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
         <p class="release-label-tag">Speaker Glass · 2025</p>
         <h3 class="release-title">Barbed Wire</h3>
         <p class="release-meta">Original · Deep House / Minimal Techno</p>
-        <a class="release-btn" href="#">Stream ↗</a>
+        <a class="release-btn" href="javascript:void(0)" onclick="event.stopPropagation(); openComingSoon();">Stream ↗</a>
       </div>
     </div>
-    <div class="release-card reveal reveal-delay-1">
+    <div class="release-card reveal reveal-delay-1" onclick="openComingSoon()">
       <div class="release-vinyl">
         <img src="images/release-func-decision.jpg" alt="The Func Decision cover art">
       </div>
@@ -389,7 +449,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
         <p class="release-label-tag">Speaker Glass · 2025</p>
         <h3 class="release-title">The Func Decision</h3>
         <p class="release-meta">Original · Deep House / Minimal Techno</p>
-        <a class="release-btn" href="#">Stream ↗</a>
+        <a class="release-btn" href="javascript:void(0)" onclick="event.stopPropagation(); openComingSoon();">Stream ↗</a>
       </div>
     </div>
   </div>
@@ -402,10 +462,10 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   <div class="reveal" style="display:flex; flex-direction:column; gap:1.5rem;">
     <div style="border: 0.5px solid var(--border); padding: 2rem; display:flex; justify-content:space-between; align-items:center;">
       <div>
-        <p style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--offwhite); margin-bottom:0.4rem;">SoundCloud Mix</p>
-        <p style="font-size:0.65rem; color:var(--muted); letter-spacing:0.1em;">Stream on SoundCloud</p>
+        <p style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--offwhite); margin-bottom:0.4rem;">Ryan Coronado B2B Salgado</p>
+        <p style="font-size:0.65rem; color:var(--muted); letter-spacing:0.1em;">Tech House · Stream on SoundCloud</p>
       </div>
-      <a href="https://on.soundcloud.com/IwdREy8TC7PwnEMyc9" target="_blank" style="font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; border: 0.5px solid var(--border-mid); color:rgba(240,236,228,0.5); padding:0.6rem 1.2rem; text-decoration:none; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--offwhite)';this.style.borderColor='rgba(240,236,228,0.5)'" onmouseout="this.style.color='rgba(240,236,228,0.5)';this.style.borderColor='var(--border-mid)'">Listen ↗</a>
+      <a href="https://soundcloud.com/ryannccoronado/ahrsi-b2b-salgado-tech-house" target="_blank" style="font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; border: 0.5px solid var(--border-mid); color:rgba(240,236,228,0.5); padding:0.6rem 1.2rem; text-decoration:none; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--offwhite)';this.style.borderColor='rgba(240,236,228,0.5)'" onmouseout="this.style.color='rgba(240,236,228,0.5)';this.style.borderColor='var(--border-mid)'">Listen ↗</a>
     </div>
   </div>
 </section>
@@ -474,7 +534,34 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   <p>Speaker Glass Records · Los Angeles, CA</p>
 </footer>
 
+<!-- COMING SOON MODAL -->
+<div class="cs-overlay" id="csOverlay">
+  <div class="cs-modal">
+    <button class="cs-close" onclick="closeComingSoon()" aria-label="Close">✕</button>
+    <p class="cs-eyebrow">Speaker Glass</p>
+    <h3 class="cs-title">Coming Soon</h3>
+    <p class="cs-text">This track is being mixed and mastered for release. Stay close — the drop isn't far off.</p>
+    <button class="cs-dismiss" onclick="closeComingSoon()">Got It</button>
+  </div>
+</div>
+
 <script>
+const csOverlay = document.getElementById('csOverlay');
+function openComingSoon() {
+  csOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeComingSoon() {
+  csOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+csOverlay.addEventListener('click', (e) => {
+  if (e.target === csOverlay) closeComingSoon();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeComingSoon();
+});
+
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
