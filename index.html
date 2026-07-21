@@ -468,6 +468,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
         <p class="release-label-tag">Speaker Glass · 2026</p>
         <h3 class="release-title">Barbed Wire</h3>
         <p class="release-meta">Single · Deep House / Minimal Techno</p>
+        <p class="release-drop"><span class="release-drop-dot"></span>Releasing TBD</p>
         <a class="release-btn" href="javascript:void(0)" onclick="event.stopPropagation(); openComingSoon();">Stream ↗</a>
       </div>
     </div>
@@ -482,7 +483,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
     <div style="border: 0.5px solid var(--border); padding: 2rem; display:flex; justify-content:space-between; align-items:center;">
       <div>
         <p style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--offwhite); margin-bottom:0.4rem;">Ryan Coronado B2B Salgado</p>
-        <p style="font-size:0.65rem; color:var(--muted); letter-spacing:0.1em;">Tech House · Stream on SoundCloud</p>
+        <p style="font-size:0.65rem; color:var(--muted); letter-spacing:0.1em;">Deep Tech · Stream on SoundCloud</p>
       </div>
       <a href="https://soundcloud.com/ryannccoronado/ahrsi-b2b-salgado-tech-house" target="_blank" style="font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; border: 0.5px solid var(--border-mid); color:rgba(240,236,228,0.5); padding:0.6rem 1.2rem; text-decoration:none; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--offwhite)';this.style.borderColor='rgba(240,236,228,0.5)'" onmouseout="this.style.color='rgba(240,236,228,0.5)';this.style.borderColor='var(--border-mid)'">Listen ↗</a>
     </div>
@@ -544,11 +545,10 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
     <a class="contact-email reveal reveal-delay-2" href="mailto:Emily@emilyberk.com">Emily@emilyberk.com</a>
     <div class="socials reveal reveal-delay-3">
       <a href="https://www.instagram.com/ryannccoronado/" target="_blank">Instagram</a>
-      <a href="#">Spotify</a>
-      <a href="#">Apple Music</a>
-      <a href="#">SoundCloud</a>
-      <a href="#">Beatport</a>
-      <a href="#">Resident Advisor</a>
+      <a href="javascript:void(0)" onclick="openArtistComingSoon('Spotify')">Spotify</a>
+      <a href="javascript:void(0)" onclick="openArtistComingSoon('Apple Music')">Apple Music</a>
+      <a href="https://soundcloud.com/ryannccoronado" target="_blank">SoundCloud</a>
+      <a href="javascript:void(0)" onclick="openArtistComingSoon('Beatport')">Beatport</a>
     </div>
   </div>
 </section>
@@ -562,16 +562,29 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 <div class="cs-overlay" id="csOverlay">
   <div class="cs-modal">
     <button class="cs-close" onclick="closeComingSoon()" aria-label="Close">✕</button>
-    <p class="cs-eyebrow">Speaker Glass</p>
-    <h3 class="cs-title">Coming Soon</h3>
-    <p class="cs-text">This track is being mixed and mastered for release. Stay close — the drop isn't far off.</p>
+    <p class="cs-eyebrow" id="csEyebrow">Speaker Glass</p>
+    <h3 class="cs-title" id="csTitle">Coming Soon</h3>
+    <p class="cs-text" id="csText">This track is being mixed and mastered for release. Stay close — the drop isn't far off.</p>
     <button class="cs-dismiss" onclick="closeComingSoon()">Got It</button>
   </div>
 </div>
 
 <script>
 const csOverlay = document.getElementById('csOverlay');
+const csEyebrow = document.getElementById('csEyebrow');
+const csTitle = document.getElementById('csTitle');
+const csText = document.getElementById('csText');
 function openComingSoon() {
+  csEyebrow.textContent = 'Speaker Glass';
+  csTitle.textContent = 'Coming Soon';
+  csText.textContent = "This track is being mixed and mastered for release. Stay close — the drop isn't far off.";
+  csOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function openArtistComingSoon(platform) {
+  csEyebrow.textContent = platform;
+  csTitle.textContent = 'Artist Page Coming Soon';
+  csText.textContent = "This page will go live with our first release, dropping August 21, 2026. Follow along until then.";
   csOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
