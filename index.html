@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Coronado — DJ & Producer</title>
+<meta name="description" content="Ryan Coronado is an LA-based DJ and producer rooted in Deep House and Minimal Techno, founder of Speakerglass Records.">
+<meta property="og:title" content="Ryan Coronado — DJ & Producer">
+<meta property="og:description" content="LA-based DJ and producer rooted in Deep House and Minimal Techno, founder of Speakerglass Records.">
+<meta property="og:image" content="images/hero.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="images/hero.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #080808;
+  --offwhite: #f0ece4;
+  --cream: #e8e3da;
+  --ink: #1a1816;
+  --muted: #7a746c;
+  --border: rgba(240,236,228,0.12);
+  --border-mid: rgba(240,236,228,0.22);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--offwhite);
+  font-family: 'DM Mono', monospace;
+  overflow-x: hidden;
+  line-height: 1;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.4rem 4rem;
+  mix-blend-mode: normal;
+  transition: background 0.4s, border-bottom 0.4s;
+}
+nav.scrolled {
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; letter-spacing: 0.06em;
+  color: var(--offwhite);
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: rgba(240,236,228,0.5);
+  font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--offwhite); }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 100vh; min-height: 640px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden;
+}
+.hero-img {
+  position: absolute; inset: 0;
+  background-image: url('images/hero.jpg');
+  background-size: cover; background-position: center 30%;
+  filter: brightness(0.85) contrast(1.1);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,8,8,0.75) 0%, rgba(8,8,8,0.1) 40%, rgba(8,8,8,0.0) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 4rem 5rem;
+}
+.hero-eyebrow {
+  font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: rgba(240,236,228,0.45); margin-bottom: 1.2rem;
+}
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4.5rem, 11vw, 9rem);
+  line-height: 0.9; letter-spacing: -0.02em;
+  color: var(--offwhite);
+}
+.hero-name span {
+  font-style: italic; color: rgba(240,236,228,0.55);
+}
+.hero-tagline {
+  margin-top: 2rem;
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  color: rgba(240,236,228,0.4); text-transform: uppercase;
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.hero-tagline::before {
+  content: ''; display: block;
+  width: 40px; height: 0.5px; background: rgba(240,236,228,0.3);
+}
+.scroll-hint {
+  position: absolute; right: 4rem; bottom: 3rem; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.scroll-hint span {
+  font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(240,236,228,0.3); writing-mode: vertical-rl;
+}
+.scroll-line {
+  width: 0.5px; height: 56px; background: var(--border); position: relative; overflow: hidden;
+}
+.scroll-line::after {
+  content: ''; position: absolute; top: -100%; left: 0;
+  width: 100%; height: 100%; background: var(--offwhite);
+  animation: sl 2.2s ease-in-out infinite;
+}
+@keyframes sl { 0%{top:-100%} 100%{top:100%} }
+
+/* ── SECTION COMMONS ── */
+section { padding: 7rem 4rem; }
+.label {
+  font-size: 0.58rem; letter-spacing: 0.38em; text-transform: uppercase;
+  color: rgba(240,236,228,0.35); margin-bottom: 3.5rem;
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.label::after {
+  content: ''; flex: 1; height: 0.5px; background: var(--border);
+}
+h2.serif {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.05; color: var(--offwhite);
+}
+
+/* ── ABOUT ── */
+.about { border-top: 0.5px solid var(--border); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+}
+.about-text h2 {
+  font-size: clamp(2rem, 4.5vw, 3.8rem); margin-bottom: 2rem;
+}
+.about-text h2 em { font-style: italic; color: rgba(240,236,228,0.45); }
+.about-text p {
+  font-size: 0.75rem; line-height: 2.1; color: var(--muted); margin-bottom: 1.5rem;
+}
+.about-img {
+  position: relative; overflow: hidden;
+}
+.about-img img {
+  width: 100%; display: block;
+  filter: grayscale(30%) contrast(1.05);
+}
+.about-img-caption {
+  position: absolute; bottom: 1rem; left: 1rem;
+  font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(240,236,228,0.45);
+}
+
+/* ── RELEASES ── */
+.releases { border-top: 0.5px solid var(--border); }
+.releases-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+}
+.release-card {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 2.5rem; border: 0.5px solid var(--border);
+  transition: background 0.3s;
+  cursor: pointer;
+}
+.release-card:hover { background: rgba(240,236,228,0.03); }
+.release-vinyl {
+  width: 110px; height: 110px; flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden; position: relative;
+}
+.release-vinyl img {
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: 50%;
+}
+.release-vinyl::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 14px; height: 14px;
+  background: var(--black);
+  border-radius: 50%;
+  border: 0.5px solid var(--border-mid);
+}
+.release-info { flex: 1; padding-top: 0.5rem; }
+.release-label-tag {
+  font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(240,236,228,0.35); margin-bottom: 0.75rem;
+}
+.release-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: var(--offwhite); margin-bottom: 0.5rem; line-height: 1.1;
+}
+.release-meta {
+  font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 1.2rem;
+}
+.release-btn {
+  display: inline-block;
+  font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+  border: 0.5px solid var(--border-mid); color: rgba(240,236,228,0.5);
+  padding: 0.5rem 1rem; text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+.release-btn:hover { color: var(--offwhite); border-color: rgba(240,236,228,0.5); }
+
+/* ── LIVE ── */
+.live { border-top: 0.5px solid var(--border); }
+.live-mosaic {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: 360px 260px;
+  gap: 2px; margin-bottom: 4rem;
+}
+.mosaic-cell {
+  overflow: hidden; position: relative;
+}
+.mosaic-cell img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%) brightness(0.85);
+  transition: filter 0.5s, transform 0.6s;
+}
+.mosaic-cell:hover img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.03);
+}
+.mosaic-cell.tall { grid-row: 1 / 3; }
+.mosaic-label {
+  position: absolute; bottom: 1rem; left: 1rem;
+  font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(240,236,228,0.5);
+  pointer-events: none;
+}
+
+.tour-list { border-top: 0.5px solid var(--border); }
+.tour-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.4rem 0; border-bottom: 0.5px solid var(--border);
+}
+.tour-venue { font-size: 0.78rem; color: var(--offwhite); letter-spacing: 0.05em; }
+.tour-city {
+  font-size: 0.62rem; color: var(--muted); letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.tour-date { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; }
+
+/* ── CONTACT ── */
+.contact { border-top: 0.5px solid var(--border); }
+.contact-inner {
+  max-width: 720px;
+}
+.contact h2 {
+  font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 1.5rem;
+}
+.contact h2 em { font-style: italic; color: rgba(240,236,228,0.45); }
+.contact-desc {
+  font-size: 0.75rem; line-height: 2.1; color: var(--muted);
+  margin-bottom: 3rem; max-width: 520px;
+}
+.contact-email {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: var(--offwhite); text-decoration: none;
+  border-bottom: 0.5px solid rgba(240,236,228,0.25);
+  padding-bottom: 6px; margin-bottom: 3.5rem;
+  width: fit-content;
+  transition: border-color 0.2s;
+}
+.contact-email:hover { border-color: var(--offwhite); }
+.socials { display: flex; gap: 2rem; flex-wrap: wrap; }
+.socials a {
+  font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+.socials a:hover { color: var(--offwhite); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 0.5px solid var(--border);
+  padding: 2rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0.28); }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.22s; }
+.reveal-delay-3 { transition-delay: 0.34s; }
+
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  section { padding: 5rem 1.5rem; }
+  .hero-content { padding: 0 1.5rem 4rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .releases-grid { grid-template-columns: 1fr; }
+  .live-mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .mosaic-cell.tall { grid-row: auto; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+  .scroll-hint { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#releases">Music</a></li>
+    <li><a href="#live">Live</a></li>
+    <li><a href="#contact">Book</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    
+    <h1 class="hero-name reveal reveal-delay-1">Ryan<br><span>Coronado</span></h1>
+    <p class="hero-tagline reveal reveal-delay-2">DJ/Producer</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  
+  <div class="about-grid">
+    <div class="about-text">
+      
+      <p class="reveal reveal-delay-1">Ryan Coronado started making music at 16, coming up in LA's underground rave and house party scene as a DJ. What started as 7-hour extended sets on weekends developed into a finer appreciation for club culture, audio engineering, and electronic music production. With sounds rooted in Deep House and Minimal Techno, Ryan Coronado reinforces the groove through huge low ends, tight percussion, and infectious melodies. As an avid festival-goer, he takes inspiration from both US and European House music cultures, conveying his emotional experiences with music and vision for life on the dancefloor in both his sets and original productions. Now 21, Ryan Coronado has performed in Boston, MA; Stockholm, Sweden; and Los Angeles, CA, where he continues to advance his musicianship at the UCLA Herb Alpert School of Music.</p>
+      <p class="reveal reveal-delay-2"></p>
+    </div>
+    <div class="about-img reveal reveal-delay-1" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+      <img src="images/about-1.jpg" alt="Ryan Coronado DJing" style="width:100%;height:100%;object-fit:cover;filter:grayscale(10%) brightness(0.9);">
+      <img src="images/about-2.jpg" alt="Ryan Coronado">
+      
+    </div>
+  </div>
+</section>
+
+
+<!-- SPEAKERGLASS -->
+<section style="border-top: 0.5px solid var(--border); padding: 5rem 4rem;">
+  <p class="label reveal">Speakerglass Label</p>
+  <p class="reveal" style="font-family: 'Playfair Display', serif; font-size: clamp(1rem, 2vw, 1.35rem); line-height: 1.9; color: var(--muted); max-width: 780px;">
+    Speakerglass est. 2026, is Ryan Coronado's newly founded label that seeks to support House music and our mission of moving dance floors while uniting individuals.
+  </p>
+</section>
+
+<!-- RELEASES -->
+<section class="releases" id="releases">
+  <p class="label reveal">Releases</p>
+  <div class="releases-grid">
+    <div class="release-card reveal">
+      <div class="release-vinyl">
+        <img src="images/release-barbed-wire.jpg" alt="Barbed Wire cover art">
+      </div>
+      <div class="release-info">
+        <p class="release-label-tag">Speaker Glass · 2025</p>
+        <h3 class="release-title">Barbed Wire</h3>
+        <p class="release-meta">Original · Deep House / Minimal Techno</p>
+        <a class="release-btn" href="#">Stream ↗</a>
+      </div>
+    </div>
+    <div class="release-card reveal reveal-delay-1">
+      <div class="release-vinyl">
+        <img src="images/release-func-decision.jpg" alt="The Func Decision cover art">
+      </div>
+      <div class="release-info">
+        <p class="release-label-tag">Speaker Glass · 2025</p>
+        <h3 class="release-title">The Func Decision</h3>
+        <p class="release-meta">Original · Deep House / Minimal Techno</p>
+        <a class="release-btn" href="#">Stream ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- MIXES -->
+<section style="border-top: 0.5px solid var(--border); padding: 5rem 4rem;" id="mixes">
+  <p class="label reveal">Live Sets & Mixes</p>
+  <div class="reveal" style="display:flex; flex-direction:column; gap:1.5rem;">
+    <div style="border: 0.5px solid var(--border); padding: 2rem; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <p style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--offwhite); margin-bottom:0.4rem;">SoundCloud Mix</p>
+        <p style="font-size:0.65rem; color:var(--muted); letter-spacing:0.1em;">Stream on SoundCloud</p>
+      </div>
+      <a href="https://on.soundcloud.com/IwdREy8TC7PwnEMyc9" target="_blank" style="font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; border: 0.5px solid var(--border-mid); color:rgba(240,236,228,0.5); padding:0.6rem 1.2rem; text-decoration:none; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--offwhite)';this.style.borderColor='rgba(240,236,228,0.5)'" onmouseout="this.style.color='rgba(240,236,228,0.5)';this.style.borderColor='var(--border-mid)'">Listen ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE -->
+<section class="live" id="live">
+  <p class="label reveal">Live</p>
+  <div class="live-mosaic reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:4rem;">
+
+    <div style="overflow:hidden;position:relative;height:500px;background:#080808;">
+      <img src="images/live-stockholm.jpg" alt="Ryan Coronado DJing in Stockholm, Sweden" style="width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(15%) brightness(0.85);transition:filter 0.5s;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'" onmouseout="this.style.filter='grayscale(15%) brightness(0.85)'">
+      <span style="position:absolute;bottom:1rem;left:1rem;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,236,228,0.5);">Stockholm, Sweden</span>
+    </div>
+    <div style="overflow:hidden;position:relative;height:500px;background:#080808;">
+      <img src="images/live-la.jpg" alt="Ryan Coronado at the decks" style="width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(15%) brightness(0.85);transition:filter 0.5s;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'" onmouseout="this.style.filter='grayscale(15%) brightness(0.85)'">
+      <span style="position:absolute;bottom:1rem;left:1rem;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,236,228,0.5);">Los Angeles</span>
+    </div>
+
+  </div>
+  <div class="tour-list reveal">
+    <div class="tour-item">
+      <div>
+        <p class="tour-venue">TBD</p>
+        <p class="tour-city">Miami, FL</p>
+      </div>
+      <p class="tour-date">US East Coast</p>
+    </div>
+    <div class="tour-item">
+      <div>
+        <p class="tour-venue">TBD</p>
+        <p class="tour-city">East Coast</p>
+      </div>
+      <p class="tour-date">US Tour</p>
+    </div>
+
+    <div class="tour-item">
+      <div>
+        <p class="tour-venue">TBD</p>
+        <p class="tour-city">Los Angeles, CA</p>
+      </div>
+      <p class="tour-date">Home base</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="label reveal">Bookings</p>
+  <div class="contact-inner">
+    <p class="reveal" style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; letter-spacing: 0.03em;">All booking inquiries contact:</p>
+    
+    <a class="contact-email reveal reveal-delay-2" href="mailto:Emily@emilyberk.com">Emily@emilyberk.com</a>
+    <div class="socials reveal reveal-delay-3">
+      <a href="#">Instagram</a>
+      <a href="#">Spotify</a>
+      <a href="#">Apple Music</a>
+      <a href="#">SoundCloud</a>
+      <a href="#">Beatport</a>
+      <a href="#">Resident Advisor</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Ryan Coronado</p>
+  <p>Speaker Glass Records · Los Angeles, CA</p>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+setTimeout(() => {
+  document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+    setTimeout(() => el.classList.add('in'), i * 180);
+  });
+}, 200);
+</script>
+</body>
+</html>
