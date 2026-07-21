@@ -215,6 +215,24 @@ h2.serif {
   transition: color 0.2s, border-color 0.2s;
 }
 .release-btn:hover { color: var(--offwhite); border-color: rgba(240,236,228,0.5); }
+.release-drop {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(240,236,228,0.75);
+  border: 0.5px solid var(--border-mid);
+  background: rgba(240,236,228,0.04);
+  padding: 0.5rem 0.9rem;
+  margin-bottom: 1.2rem;
+}
+.release-drop-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--offwhite);
+  animation: dropPulse 1.8s ease-in-out infinite;
+}
+@keyframes dropPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(240,236,228,0.35); }
+  50% { opacity: 0.4; box-shadow: 0 0 0 4px rgba(240,236,228,0); }
+}
 
 /* ── COMING SOON MODAL ── */
 .cs-overlay {
@@ -382,6 +400,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#releases">Music</a></li>
+    <li><a href="#mixes">Mixes</a></li>
     <li><a href="#live">Live</a></li>
     <li><a href="#contact">Book</a></li>
   </ul>
@@ -394,7 +413,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   <div class="hero-content">
     
     <h1 class="hero-name reveal reveal-delay-1">Ryan<br><span>Coronado</span></h1>
-    <p class="hero-tagline reveal reveal-delay-2">DJ/Producer</p>
+    <p class="hero-tagline reveal reveal-delay-2">DJ/Producer · Los Angeles</p>
   </div>
   <div class="scroll-hint">
     <span>Scroll</span>
@@ -431,22 +450,23 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   <div class="releases-grid">
     <div class="release-card reveal" onclick="openComingSoon()">
       <div class="release-vinyl">
-        <img src="images/release-barbed-wire.jpg" alt="Barbed Wire cover art">
-      </div>
-      <div class="release-info">
-        <p class="release-label-tag">Speaker Glass · 2026</p>
-        <h3 class="release-title">Barbed Wire</h3>
-        <p class="release-meta">Single · Deep House / Minimal Techno</p>
-        <a class="release-btn" href="javascript:void(0)" onclick="event.stopPropagation(); openComingSoon();">Stream ↗</a>
-      </div>
-    </div>
-    <div class="release-card reveal reveal-delay-1" onclick="openComingSoon()">
-      <div class="release-vinyl">
         <img src="images/release-func-decision.jpg" alt="The Func Decision cover art">
       </div>
       <div class="release-info">
         <p class="release-label-tag">Speaker Glass · 2026</p>
         <h3 class="release-title">The Func Decision</h3>
+        <p class="release-meta">Single · Deep House / Minimal Techno</p>
+        <p class="release-drop"><span class="release-drop-dot"></span>Releasing August 21, 2026</p>
+        <a class="release-btn" href="javascript:void(0)" onclick="event.stopPropagation(); openComingSoon();">Stream ↗</a>
+      </div>
+    </div>
+    <div class="release-card reveal reveal-delay-1" onclick="openComingSoon()">
+      <div class="release-vinyl">
+        <img src="images/release-barbed-wire.jpg" alt="Barbed Wire cover art">
+      </div>
+      <div class="release-info">
+        <p class="release-label-tag">Speaker Glass · 2026</p>
+        <h3 class="release-title">Barbed Wire</h3>
         <p class="release-meta">Single · Deep House / Minimal Techno</p>
         <a class="release-btn" href="javascript:void(0)" onclick="event.stopPropagation(); openComingSoon();">Stream ↗</a>
       </div>
@@ -472,6 +492,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 <!-- LIVE -->
 <section class="live" id="live">
   <p class="label reveal">Live</p>
+  <p class="reveal" style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; letter-spacing: 0.03em;">Live Photos</p>
   <div class="live-mosaic reveal" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-bottom:4rem;">
 
     <div style="overflow:hidden;position:relative;height:500px;background:#080808;">
