@@ -39,6 +39,7 @@ body {
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.8rem 1.5rem;
   padding: 1.4rem 4rem;
   mix-blend-mode: normal;
   transition: background 0.4s, border-bottom 0.4s;
@@ -60,6 +61,13 @@ nav.scrolled {
   text-decoration: none; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--offwhite); }
+.nav-socials { display: flex; gap: 1.5rem; list-style: none; }
+.nav-socials a {
+  color: rgba(240,236,228,0.4);
+  font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase;
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-socials a:hover { color: var(--offwhite); }
 
 /* ── HERO ── */
 .hero {
@@ -380,6 +388,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 
 @media (max-width: 768px) {
   nav { padding: 1.2rem 1.5rem; }
+  .nav-links, .nav-socials { flex-wrap: wrap; gap: 0.9rem 1.2rem; }
   section { padding: 5rem 1.5rem; }
   .hero-content { padding: 0 1.5rem 4rem; }
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -394,14 +403,19 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 <body>
 
 <nav id="nav">
-  
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#releases">Music</a></li>
     <li><a href="#mixes">Mixes</a></li>
     <li><a href="#live">Live</a></li>
     <li><a href="#contact">Book</a></li>
-    <li><a href="#socials">Socials</a></li>
+  </ul>
+  <ul class="nav-socials">
+    <li><a href="https://www.instagram.com/ryannccoronado/" target="_blank">Instagram</a></li>
+    <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Spotify')">Spotify</a></li>
+    <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Apple Music')">Apple Music</a></li>
+    <li><a href="https://soundcloud.com/ryannccoronado" target="_blank">SoundCloud</a></li>
+    <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Beatport')">Beatport</a></li>
   </ul>
 </nav>
 
@@ -545,13 +559,6 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
     <p class="reveal" style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; letter-spacing: 0.03em;">For all inquiries contact:</p>
     
     <a class="contact-email reveal reveal-delay-2" href="mailto:emilyb@237global.com">emilyb@237global.com</a>
-    <div class="socials reveal reveal-delay-3" id="socials">
-      <a href="https://www.instagram.com/ryannccoronado/" target="_blank">Instagram</a>
-      <a href="javascript:void(0)" onclick="openArtistComingSoon('Spotify')">Spotify</a>
-      <a href="javascript:void(0)" onclick="openArtistComingSoon('Apple Music')">Apple Music</a>
-      <a href="https://soundcloud.com/ryannccoronado" target="_blank">SoundCloud</a>
-      <a href="javascript:void(0)" onclick="openArtistComingSoon('Beatport')">Beatport</a>
-    </div>
   </div>
 </section>
 
