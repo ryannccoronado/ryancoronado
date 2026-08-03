@@ -10,7 +10,11 @@
 <meta property="og:image" content="images/hero.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#080808">
 <link rel="icon" href="images/hero.jpg">
+<link rel="preload" as="image" href="images/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,13 +37,29 @@ body {
   font-family: 'DM Mono', monospace;
   overflow-x: hidden;
   line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--offwhite); color: var(--black); }
+
+a:focus-visible, button:focus-visible {
+  outline: 1px solid rgba(240,236,228,0.6);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .scroll-line::after, .release-drop-dot { animation: none !important; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 0.8rem 1.5rem;
+  display: flex; align-items: center;
   padding: 1.4rem 4rem;
   mix-blend-mode: normal;
   transition: background 0.4s, border-bottom 0.4s;
@@ -53,6 +73,10 @@ nav.scrolled {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem; letter-spacing: 0.06em;
   color: var(--offwhite);
+}
+.nav-menu {
+  display: flex; flex: 1; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.8rem 1.5rem;
 }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 .nav-links a {
@@ -68,6 +92,19 @@ nav.scrolled {
   text-decoration: none; transition: color 0.2s;
 }
 .nav-socials a:hover { color: var(--offwhite); }
+.nav-toggle {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 24px; height: 18px; margin-left: auto;
+  background: none; border: none; cursor: pointer; padding: 0; z-index: 301;
+}
+.nav-toggle span {
+  display: block; width: 100%; height: 1px; background: var(--offwhite);
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 /* ── HERO ── */
 .hero {
@@ -179,10 +216,10 @@ h2.serif {
 .release-card {
   display: flex; gap: 2rem; align-items: flex-start;
   padding: 2.5rem; border: 0.5px solid var(--border);
-  transition: background 0.3s;
+  transition: background 0.3s, border-color 0.3s;
   cursor: pointer;
 }
-.release-card:hover { background: rgba(240,236,228,0.03); }
+.release-card:hover { background: rgba(240,236,228,0.03); border-color: var(--border-mid); }
 .release-vinyl {
   width: 110px; height: 110px; flex-shrink: 0;
   border-radius: 50%;
@@ -388,7 +425,20 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 
 @media (max-width: 768px) {
   nav { padding: 1.2rem 1.5rem; }
-  .nav-links, .nav-socials { flex-wrap: wrap; gap: 0.9rem 1.2rem; }
+  .nav-toggle { display: flex; }
+  .nav-menu {
+    position: fixed; inset: 0; z-index: 250;
+    flex-direction: column; justify-content: center; align-items: center;
+    gap: 3rem;
+    background: rgba(8,8,8,0.98); backdrop-filter: blur(20px);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+  }
+  .nav-menu.open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+  .nav-links, .nav-socials { flex-direction: column; align-items: center; gap: 1.8rem; }
+  .nav-links a { font-size: 0.85rem; letter-spacing: 0.3em; }
+  .nav-socials a { font-size: 0.68rem; letter-spacing: 0.22em; }
   section { padding: 5rem 1.5rem; }
   .hero-content { padding: 0 1.5rem 4rem; }
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -406,20 +456,25 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 <body>
 
 <nav id="nav">
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#releases">Music</a></li>
-    <li><a href="#mixes">Mixes</a></li>
-    <li><a href="#live">Live</a></li>
-    <li><a href="#contact">Book</a></li>
-  </ul>
-  <ul class="nav-socials">
-    <li><a href="https://www.instagram.com/ryannccoronado/" target="_blank">Instagram</a></li>
-    <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Spotify')">Spotify</a></li>
-    <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Apple Music')">Apple Music</a></li>
-    <li><a href="https://soundcloud.com/ryannccoronado" target="_blank">SoundCloud</a></li>
-    <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Beatport')">Beatport</a></li>
-  </ul>
+  <div class="nav-menu" id="navMenu">
+    <ul class="nav-links" aria-label="Primary">
+      <li><a href="#about">About</a></li>
+      <li><a href="#releases">Music</a></li>
+      <li><a href="#mixes">Mixes</a></li>
+      <li><a href="#live">Live</a></li>
+      <li><a href="#contact">Book</a></li>
+    </ul>
+    <ul class="nav-socials" aria-label="Social">
+      <li><a href="https://www.instagram.com/ryannccoronado/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Spotify')">Spotify</a></li>
+      <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Apple Music')">Apple Music</a></li>
+      <li><a href="https://soundcloud.com/ryannccoronado" target="_blank" rel="noopener noreferrer">SoundCloud</a></li>
+      <li><a href="javascript:void(0)" onclick="openArtistComingSoon('Beatport')">Beatport</a></li>
+    </ul>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -444,12 +499,12 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
     <div class="about-text">
 
       <p class="reveal reveal-delay-1" style="font-size:clamp(1rem, 1.3vw, 1.2rem); line-height:1.95;">Ryan Coronado started making music at 16, DJing in LA's underground rave and house party scene. What started as 6-hour sets on weekends developed into a finer appreciation for club culture, audio engineering, and electronic music production. His sound has grown to become a funky blend of Deep House and Minimal Techno that makes for a perfectly energized dance floor. As an avid concert-goer, he takes inspiration from both US and European House music cultures, conveying his emotional experiences with music and vision for life on the dance floor in both his sets and original productions. Now 21, Ryan Coronado has performed in Boston, MA; Stockholm, Sweden; and Los Angeles, CA, where he continues to advance his musicianship at the UCLA Herb Alpert School of Music.</p>
-      <video class="reveal reveal-delay-2" autoplay muted loop playsinline style="width:100%;display:block;margin-top:2.5rem;filter:grayscale(10%) contrast(1.05);">
+      <video class="reveal reveal-delay-2" autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="videos/about-poster.jpg" style="width:100%;display:block;margin-top:2.5rem;filter:grayscale(10%) contrast(1.05);">
         <source src="videos/about.mp4" type="video/mp4">
       </video>
     </div>
     <div class="about-img reveal reveal-delay-1" style="height:100%;min-height:640px;">
-      <img src="images/about.jpg" alt="Ryan Coronado" style="width:100%;height:100%;object-fit:cover;">
+      <img src="images/about.jpg" alt="Ryan Coronado" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
     </div>
   </div>
 </section>
@@ -469,7 +524,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   <div class="releases-grid">
     <div class="release-card reveal" onclick="openComingSoon()">
       <div class="release-vinyl">
-        <img src="images/release-func-decision.jpg" alt="The Func Decision cover art">
+        <img src="images/release-func-decision.jpg" alt="The Func Decision cover art" loading="lazy" decoding="async">
       </div>
       <div class="release-info">
         <p class="release-label-tag">Speaker Glass · 2026</p>
@@ -481,7 +536,7 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
     </div>
     <div class="release-card reveal reveal-delay-1" onclick="openComingSoon()">
       <div class="release-vinyl">
-        <img src="images/release-barbed-wire.jpg" alt="Barbed Wire cover art">
+        <img src="images/release-barbed-wire.jpg" alt="Barbed Wire cover art" loading="lazy" decoding="async">
       </div>
       <div class="release-info">
         <p class="release-label-tag">Speaker Glass · 2026</p>
@@ -540,15 +595,15 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   <div class="live-mosaic reveal" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;">
 
     <div style="overflow:hidden;position:relative;height:500px;background:#080808;">
-      <img src="images/live-stockholm.jpg" alt="Ryan Coronado DJing in Stockholm, Sweden" style="width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(15%) brightness(0.85);transition:filter 0.5s;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'" onmouseout="this.style.filter='grayscale(15%) brightness(0.85)'">
+      <img src="images/live-stockholm.jpg" alt="Ryan Coronado DJing in Stockholm, Sweden" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(15%) brightness(0.85);transition:filter 0.5s;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'" onmouseout="this.style.filter='grayscale(15%) brightness(0.85)'">
       <span style="position:absolute;bottom:1rem;left:1rem;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,236,228,0.5);">Stockholm, Sweden</span>
     </div>
     <div style="overflow:hidden;position:relative;height:500px;background:#080808;">
-      <img src="images/live-la.jpg" alt="Ryan Coronado at the decks" style="width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(15%) brightness(0.85);transition:filter 0.5s;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'" onmouseout="this.style.filter='grayscale(15%) brightness(0.85)'">
+      <img src="images/live-la.jpg" alt="Ryan Coronado at the decks" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(15%) brightness(0.85);transition:filter 0.5s;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'" onmouseout="this.style.filter='grayscale(15%) brightness(0.85)'">
       <span style="position:absolute;bottom:1rem;left:1rem;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,236,228,0.5);">Los Angeles</span>
     </div>
     <div style="overflow:hidden;position:relative;height:500px;background:#080808;">
-      <img src="images/live-boston.jpg" alt="Ryan Coronado behind the booth" style="width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(15%) brightness(0.85);transition:filter 0.5s;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'" onmouseout="this.style.filter='grayscale(15%) brightness(0.85)'">
+      <img src="images/live-boston.jpg" alt="Ryan Coronado behind the booth" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(15%) brightness(0.85);transition:filter 0.5s;" onmouseover="this.style.filter='grayscale(0%) brightness(1)'" onmouseout="this.style.filter='grayscale(15%) brightness(0.85)'">
       <span style="position:absolute;bottom:1rem;left:1rem;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,236,228,0.5);">Boston</span>
     </div>
 
@@ -572,12 +627,12 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 
 <!-- COMING SOON MODAL -->
 <div class="cs-overlay" id="csOverlay">
-  <div class="cs-modal">
+  <div class="cs-modal" role="dialog" aria-modal="true" aria-labelledby="csTitle">
     <button class="cs-close" onclick="closeComingSoon()" aria-label="Close">✕</button>
     <p class="cs-eyebrow" id="csEyebrow">Speaker Glass</p>
     <h3 class="cs-title" id="csTitle">Coming Soon</h3>
     <p class="cs-text" id="csText">This track is being mixed and mastered for release. Stay close — the drop isn't far off.</p>
-    <button class="cs-dismiss" onclick="closeComingSoon()">Got It</button>
+    <button class="cs-dismiss" id="csDismiss" onclick="closeComingSoon()">Got It</button>
   </div>
 </div>
 
@@ -586,23 +641,30 @@ const csOverlay = document.getElementById('csOverlay');
 const csEyebrow = document.getElementById('csEyebrow');
 const csTitle = document.getElementById('csTitle');
 const csText = document.getElementById('csText');
+let csLastFocused = null;
+const csDismiss = document.getElementById('csDismiss');
 function openComingSoon() {
   csEyebrow.textContent = 'Speaker Glass';
   csTitle.textContent = 'Coming Soon';
   csText.textContent = "This track is being mixed and mastered for release. Stay close — the drop isn't far off.";
+  csLastFocused = document.activeElement;
   csOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  csDismiss.focus();
 }
 function openArtistComingSoon(platform) {
   csEyebrow.textContent = platform;
   csTitle.textContent = 'Artist Page Coming Soon';
   csText.textContent = "This page will go live with our first release, dropping August 21, 2026. Follow along until then.";
+  csLastFocused = document.activeElement;
   csOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  csDismiss.focus();
 }
 function closeComingSoon() {
   csOverlay.classList.remove('open');
   document.body.style.overflow = '';
+  if (csLastFocused) csLastFocused.focus();
 }
 csOverlay.addEventListener('click', (e) => {
   if (e.target === csOverlay) closeComingSoon();
@@ -614,6 +676,20 @@ document.addEventListener('keydown', (e) => {
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+function setNavOpen(isOpen) {
+  navMenu.classList.toggle('open', isOpen);
+  navToggle.classList.toggle('open', isOpen);
+  navToggle.setAttribute('aria-expanded', String(isOpen));
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+navToggle.addEventListener('click', () => setNavOpen(!navMenu.classList.contains('open')));
+navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNavOpen(false)));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') setNavOpen(false);
 });
 
 const obs = new IntersectionObserver((entries) => {
