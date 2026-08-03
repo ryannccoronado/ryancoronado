@@ -397,6 +397,9 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   .mosaic-cell.tall { grid-row: auto; }
   footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
   .scroll-hint { display: none; }
+  .release-card { flex-direction: column; padding: 1.75rem; gap: 1.25rem; }
+  .release-vinyl { width: 84px; height: 84px; }
+  .mix-card { flex-direction: column; align-items: flex-start !important; gap: 1.25rem; padding: 1.5rem !important; }
 }
 </style>
 </head>
@@ -496,19 +499,19 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
 <section style="border-top: 0.5px solid var(--border); padding: 5rem 4rem;" id="mixes">
   <p class="label reveal">Live Sets & Mixes</p>
   <div class="reveal" style="display:flex; flex-direction:column; gap:1.5rem;">
-    <div style="border: 0.5px solid var(--border); padding: 2rem; display:flex; justify-content:space-between; align-items:center;">
+    <div class="mix-card" style="border: 0.5px solid var(--border); padding: 2rem; display:flex; justify-content:space-between; align-items:center;">
       <div>
         <p style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--offwhite); margin-bottom:0.4rem;">Ryan Coronado B2B Salgado</p>
         <p style="font-size:0.65rem; color:var(--muted); letter-spacing:0.1em;">Deep Tech · Stream on SoundCloud</p>
       </div>
-      <a href="https://soundcloud.com/ryannccoronado/ahrsi-b2b-salgado-tech-house" target="_blank" style="font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; border: 0.5px solid var(--border-mid); color:rgba(240,236,228,0.5); padding:0.6rem 1.2rem; text-decoration:none; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--offwhite)';this.style.borderColor='rgba(240,236,228,0.5)'" onmouseout="this.style.color='rgba(240,236,228,0.5)';this.style.borderColor='var(--border-mid)'">Listen ↗</a>
+      <a href="https://soundcloud.com/ryannccoronado/ahrsi-b2b-salgado-tech-house" target="_blank" style="font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; border: 0.5px solid var(--border-mid); color:rgba(240,236,228,0.5); padding:0.6rem 1.2rem; text-decoration:none; transition:color 0.2s, border-color 0.2s; white-space:nowrap;" onmouseover="this.style.color='var(--offwhite)';this.style.borderColor='rgba(240,236,228,0.5)'" onmouseout="this.style.color='rgba(240,236,228,0.5)';this.style.borderColor='var(--border-mid)'">Listen ↗</a>
     </div>
-    <div style="border: 0.5px solid var(--border); padding: 2rem; display:flex; justify-content:space-between; align-items:center;">
+    <div class="mix-card" style="border: 0.5px solid var(--border); padding: 2rem; display:flex; justify-content:space-between; align-items:center;">
       <div>
         <p style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--offwhite); margin-bottom:0.4rem;">Deep House Mix</p>
         <p style="font-size:0.65rem; color:var(--muted); letter-spacing:0.1em;">Deep House · Stream on SoundCloud</p>
       </div>
-      <a href="https://soundcloud.com/ryannccoronado/groovy-deep-house-mix" target="_blank" style="font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; border: 0.5px solid var(--border-mid); color:rgba(240,236,228,0.5); padding:0.6rem 1.2rem; text-decoration:none; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--offwhite)';this.style.borderColor='rgba(240,236,228,0.5)'" onmouseout="this.style.color='rgba(240,236,228,0.5)';this.style.borderColor='var(--border-mid)'">Listen ↗</a>
+      <a href="https://soundcloud.com/ryannccoronado/groovy-deep-house-mix" target="_blank" style="font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; border: 0.5px solid var(--border-mid); color:rgba(240,236,228,0.5); padding:0.6rem 1.2rem; text-decoration:none; transition:color 0.2s, border-color 0.2s; white-space:nowrap;" onmouseover="this.style.color='var(--offwhite)';this.style.borderColor='rgba(240,236,228,0.5)'" onmouseout="this.style.color='rgba(240,236,228,0.5)';this.style.borderColor='var(--border-mid)'">Listen ↗</a>
     </div>
   </div>
 </section>
