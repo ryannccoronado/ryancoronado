@@ -203,16 +203,23 @@ h2.serif {
 }
 .about-text {
   max-width: 520px;
+  margin-left: 6rem;
 }
 .about-photo {
   position: relative;
   height: 100%; min-height: 640px;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 22%, black 50%);
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 22%, black 50%);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 22%, black 50%),
+    linear-gradient(to top, transparent 0%, rgba(0,0,0,0.55) 20%, black 42%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 22%, black 50%),
+    linear-gradient(to top, transparent 0%, rgba(0,0,0,0.55) 20%, black 42%);
+  mask-composite: intersect;
 }
 .about-photo img {
   width: 100%; height: 100%; object-fit: cover;
-  opacity: 0.85;
+  opacity: 0.8;
   filter: grayscale(15%) contrast(1.05);
 }
 .about-text h2 {
@@ -457,10 +464,13 @@ footer p { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,236,228,0
   section { padding: 5rem 1.5rem; }
   .hero-content { padding: 0 1.5rem 4rem; }
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-text { margin-left: 0; }
   .about-photo {
     min-height: 380px;
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-composite: source-over;
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-composite: add;
   }
   .releases-grid { grid-template-columns: 1fr; }
   .live-mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
