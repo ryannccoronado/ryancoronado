@@ -708,10 +708,8 @@ if (heroVideo) {
   heroVideo.playsInline = true;
   const tryPlay = () => heroVideo.play().catch(() => {});
   tryPlay();
+  ['loadedmetadata', 'loadeddata', 'canplay'].forEach(evt => heroVideo.addEventListener(evt, tryPlay));
   document.addEventListener('visibilitychange', () => { if (!document.hidden) tryPlay(); });
-  ['touchstart', 'click', 'scroll'].forEach(evt => {
-    document.addEventListener(evt, tryPlay, { once: true, passive: true });
-  });
 }
 
 const nav = document.getElementById('nav');
